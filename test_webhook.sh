@@ -2,7 +2,7 @@
 
 # Test the n8n webhook manually - PRODUCTION endpoint
 
-WEBHOOK_URL="https://carlosgorrichoai.one/n8n/webhook/load-test"
+WEBHOOK_URL="http://localhost:5678/n8n/webhook/load-test"
 
 echo "Testing PRODUCTION webhook: $WEBHOOK_URL"
 echo ""
