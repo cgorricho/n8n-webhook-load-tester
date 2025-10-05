@@ -5,39 +5,25 @@
 ### 1. n8n Workflow
 - **Name**: "Webhook Load Test - Random Workload"
 - **ID**: `9Eo6dcyKwmLpWDw8`
-- **Webhook Path**: `/load-test`
-- **Status**: ⚠️ Currently INACTIVE - needs to be activated
+- **Webhook URL**: `https://carlosgorrichoai.one/n8n/webhook-test/load-test`
+- **Status**: ⚠️ Make sure it's ACTIVATED in n8n
 
 ### 2. GitHub Repository
 - **URL**: https://github.com/cgorricho/n8n-webhook-load-tester
 - **Contains**:
-  - `app.py` - Streamlit application with async webhook caller
+  - `app.py` - Streamlit application with async webhook caller (webhook URL pre-configured)
   - `requirements.txt` - Python dependencies
   - `README.md` - Full documentation
-  - `.streamlit/config.toml` - App configuration
 
-## 🚀 Next Steps
+## 🚀 Quick Start (3 Steps)
 
 ### Step 1: Activate the n8n Workflow
 
-**IMPORTANT**: The workflow is currently inactive. You need to activate it:
-
-1. Go to your n8n instance
+1. Go to your n8n instance at `https://carlosgorrichoai.one/n8n`
 2. Open the workflow "Webhook Load Test - Random Workload"
-3. Click the **Activate** toggle in the top right
-4. Copy the webhook URL (it will be shown when active)
+3. Click the **Activate** toggle in the top right (must be green/ON)
 
-The webhook URL will be in this format:
-```
-https://your-n8n-instance.com/webhook/load-test
-```
-
-Or for production webhooks:
-```
-https://your-n8n-instance.com/webhook-test/load-test
-```
-
-### Step 2: Run the Streamlit App
+### Step 2: Clone and Install
 
 ```bash
 # Clone the repo
@@ -46,73 +32,71 @@ cd n8n-webhook-load-tester
 
 # Install dependencies
 pip install -r requirements.txt
+```
 
-# (Optional) Set webhook URL as environment variable
-export N8N_WEBHOOK_URL="https://your-n8n-instance.com/webhook/load-test"
+### Step 3: Run the App
 
-# Run the app
+```bash
 streamlit run app.py
 ```
 
-### Step 3: Test Concurrency
+That's it! The app will open in your browser at http://localhost:8501
 
-1. Open the app in your browser (usually http://localhost:8501)
-2. Enter your webhook URL in the sidebar
-3. Set number of requests (start with 10)
-4. Click "Start Load Test"
-5. Watch the concurrent execution counter in real-time!
+## 📊 Using the Load Tester
 
-## 📊 What to Expect
+1. Use the slider to set how many concurrent requests (default: 10)
+2. Click "🚀 Start Load Test"
+3. Watch the real-time metrics:
+   - **Currently Running** - Active webhook calls right now
+   - **Max Concurrent** - Peak simultaneous executions
+4. Review detailed results including unique execution IDs
 
-- **Single workflow, multiple executions**: The app will call the same webhook URL multiple times
-- **Random workload**: Each execution will take 1-5 seconds (random)
-- **Concurrent tracking**: You'll see how many requests are running simultaneously
-- **n8n behavior**:
-  - **Cloud**: May queue requests if you hit concurrency limits
-  - **Self-hosted**: Will run all requests concurrently (unless limits configured)
+## 🔧 Configuration
 
-## 🔧 Workflow Details
+The webhook URL is **hardcoded** in the app:
+```
+https://carlosgorrichoai.one/n8n/webhook-test/load-test
+```
 
-The n8n workflow does:
+No environment variables needed! Your n8n server is protected by API key and 2FA, so the webhook is publicly accessible for testing.
 
-1. **Webhook Trigger** - Accepts POST requests at `/load-test`
-2. **Random Delay** - Simulates work with 1-5 second random delay
-3. **Response** - Returns JSON with:
-   ```json
-   {
-     "message": "work complete",
-     "delaySeconds": 3,
-     "startTime": "2025-10-05T02:34:52.123Z",
-     "endTime": "2025-10-05T02:34:55.123Z",
-     "workloadDescription": "Simulated 3s workload"
-   }
-   ```
+## 📋 What to Expect
 
-## 💡 Tips
-
-- Start with **5-10 requests** to see how your instance handles concurrency
-- Watch the **"Currently Running"** metric - this shows true concurrency
-- **Max Concurrent** tells you the peak simultaneous executions
-- If you see queuing behavior, you've hit your concurrency limit
-- Check n8n executions tab to see all the workflow runs
+- **Each execution takes 1-5 seconds** (random)
+- **All requests launch simultaneously** (true async concurrency)
+- **Unique execution ID** for each workflow run (e.g., `exec-1728095087123-abc123def`)
+- **Response includes**:
+  - Message: "work complete"
+  - Execution ID
+  - Delay duration
+  - Start/end timestamps
+  - Workload description
 
 ## 🐛 Troubleshooting
 
-**"Please configure a valid webhook URL"**
-- Make sure you've activated the n8n workflow
-- Copy the exact webhook URL from n8n
-- Include the full URL with https://
+**All requests fail:**
+- Make sure the n8n workflow is **activated** (green toggle)
+- Verify you can access `https://carlosgorrichoai.one/n8n`
 
-**All requests fail**
-- Verify the workflow is active (green toggle in n8n)
-- Check if your n8n instance is accessible from your machine
-- Try the webhook URL in Postman/curl first
-
-**No concurrent executions**
+**No concurrent executions shown:**
 - This is normal if requests complete very quickly
-- Try increasing the number of requests
-- The random delay ensures some overlap
+- Try increasing the number of requests (e.g., 20-30)
+- The random 1-5 second delay ensures some overlap
 
-## 📚 Learn More
+**Want to test the webhook manually?**
+```bash
+curl -X POST "https://carlosgorrichoai.one/n8n/webhook-test/load-test" \
+  -H "Content-Type: application/json" \
+  -d '{"test": true}'
+```
 
-See the full README.md for detailed information about metrics, use cases, and how everything works.
+You should get back a JSON response with "work complete" and a unique execution ID.
+
+## 📚 Next Steps
+
+- Start with 10 requests to see baseline performance
+- Gradually increase to find your concurrency sweet spot
+- Check n8n's executions tab to see all the workflow runs
+- Each execution will have its unique ID matching the app's results
+
+Ready to test? Just run `streamlit run app.py` and click the button! 🚀
