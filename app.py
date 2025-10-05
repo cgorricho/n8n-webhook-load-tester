@@ -154,13 +154,16 @@ if st.button("🚀 Start Load Test", type="primary", use_container_width=True):
                 if r["status"] == "success":
                     response_msg = r["response"].get("message", "N/A")
                     workload = r["response"].get("workloadDescription", "N/A")
+                    execution_id = r["response"].get("executionId", "N/A")
                 else:
                     response_msg = "Error"
                     workload = r.get("error", "Unknown error")
+                    execution_id = "N/A"
                 
                 table_data.append({
                     "Request ID": r["request_id"],
                     "Status": "✅" if r["status"] == "success" else "❌",
+                    "Execution ID": execution_id,
                     "Message": response_msg,
                     "Workload": workload,
                     "Time (s)": r["elapsed_time"]
@@ -178,5 +181,12 @@ st.markdown("""
 
 ### ℹ️ About
 This app tests n8n webhook concurrency by making multiple async HTTP requests. 
-The workflow has a random 1-5 second delay to simulate real workload.
+The workflow has a random 1-5 second delay to simulate real workload and generates 
+a unique execution ID for each run based on the timestamp.
+
+**Response Format:**
+- `message`: "work complete"
+- `executionId`: Unique identifier (e.g., exec-1728095087123-abc123def)
+- `delaySeconds`: Random delay (1-5 seconds)
+- `workloadDescription`: Human-readable description
 """)
