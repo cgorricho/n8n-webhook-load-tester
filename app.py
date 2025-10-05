@@ -9,8 +9,8 @@ st.set_page_config(page_title="n8n Webhook Load Tester", page_icon="🚀", layou
 st.title("🚀 n8n Webhook Load Tester")
 st.markdown("Test concurrent webhook executions with async requests")
 
-# Hardcoded webhook URL
-WEBHOOK_URL = "https://carlosgorrichoai.one/n8n/webhook-test/load-test"
+# Hardcoded webhook URL - PRODUCTION endpoint
+WEBHOOK_URL = "https://carlosgorrichoai.one/n8n/webhook/load-test"
 
 # Configuration
 with st.sidebar:
@@ -178,7 +178,7 @@ This app tests n8n webhook concurrency by making multiple async HTTP requests.
 The workflow has a random 1-5 second delay to simulate real workload and generates 
 a unique execution ID for each run based on the timestamp.
 
-**Webhook URL:** `https://carlosgorrichoai.one/n8n/webhook-test/load-test`
+**Webhook URL:** `https://carlosgorrichoai.one/n8n/webhook/load-test` (Production)
 
 **Response Format:**
 - `message`: "work complete"
