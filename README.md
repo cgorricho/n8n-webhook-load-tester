@@ -9,17 +9,14 @@ A simple Streamlit app to test concurrent webhook executions on your n8n workflo
 - 📈 **Detailed metrics** - Success/failure rates, timing, and workload info
 - 🆔 **Unique execution tracking** - Each workflow execution has a unique timestamp-based ID
 - ⚙️ **Configurable** - Adjust number of concurrent requests via slider
+- 🔒 **Pre-configured** - Webhook URL hardcoded for immediate use
 
 ## Setup
 
 ### Prerequisites
 
-1. **n8n workflow** - You need an active n8n workflow with a webhook trigger
-   - The workflow should be created with the webhook path `/load-test`
-   - It includes a random 1-5 second delay to simulate workload
-   - Returns a "work complete" message with timing info and unique execution ID
-
-2. **Python 3.8+** installed
+- **Python 3.8+** installed
+- The n8n workflow is already active and configured
 
 ### Installation
 
@@ -31,17 +28,6 @@ cd n8n-webhook-load-tester
 # Install dependencies
 pip install -r requirements.txt
 ```
-
-### Configuration
-
-You can set your webhook URL in two ways:
-
-1. **Environment variable** (recommended):
-```bash
-export N8N_WEBHOOK_URL="https://your-n8n-instance.com/webhook/load-test"
-```
-
-2. **In the app** - Enter it in the sidebar when running
 
 ## Usage
 
@@ -55,11 +41,12 @@ The app will open in your browser at `http://localhost:8501`
 
 ### Using the app
 
-1. **Enter your webhook URL** in the sidebar (or set via environment variable)
-2. **Set the number of requests** using the slider (1-50)
-3. **Click "Start Load Test"** to begin
-4. **Monitor** the concurrent executions in real-time
-5. **Review results** including success rate, timing, execution IDs, and individual request details
+1. **Set the number of requests** using the slider (1-50)
+2. **Click "Start Load Test"** to begin
+3. **Monitor** the concurrent executions in real-time
+4. **Review results** including success rate, timing, execution IDs, and individual request details
+
+The webhook URL is pre-configured to: `https://carlosgorrichoai.one/n8n/webhook-test/load-test`
 
 ## How it works
 
@@ -104,6 +91,18 @@ The app:
 - Compare Cloud vs self-hosted concurrency behavior
 - Debug race conditions in workflows
 - Track individual workflow executions with unique IDs
+
+## Quick Start
+
+```bash
+# Install and run
+git clone https://github.com/cgorricho/n8n-webhook-load-tester.git
+cd n8n-webhook-load-tester
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Then just click "Start Load Test" and watch it go! 🚀
 
 ## License
 
