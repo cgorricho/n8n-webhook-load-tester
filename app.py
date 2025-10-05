@@ -22,8 +22,8 @@ st.set_page_config(page_title="n8n Webhook Load Tester", page_icon="🚀", layou
 st.title("🚀 n8n Webhook Load Tester")
 st.markdown("Test concurrent webhook executions with async requests")
 
-# Hardcoded webhook URL - TEST endpoint (publicly accessible)
-WEBHOOK_URL = "https://carlosgorrichoai.one/n8n/webhook-test/load-test"
+# Hardcoded webhook URL - PRODUCTION endpoint (publicly accessible via N8N_WEBHOOK_URL config)
+WEBHOOK_URL = "https://carlosgorrichoai.one/n8n/webhook/load-test"
 
 logger.info(f"App started. Webhook URL: {WEBHOOK_URL}")
 
@@ -284,17 +284,23 @@ if st.button("🚀 Start Load Test", type="primary", use_container_width=True):
 st.markdown("---")
 st.markdown("""
 ### 📝 Instructions
-1. **Set the number of requests** using the slider in the sidebar
-2. **Click Start Load Test** to begin
-3. Watch the real-time concurrent execution counter
-4. Check `webhook_tester.log` for detailed debugging information
+1. **Ensure the n8n workflow is ACTIVE** (toggle must be ON)
+2. **Set the number of requests** using the slider in the sidebar
+3. **Click Start Load Test** to begin
+4. Watch the real-time concurrent execution counter
+5. Check `webhook_tester.log` for detailed debugging information
 
 ### ℹ️ About
 This app tests n8n webhook concurrency by making multiple async HTTP requests. 
 The workflow has a random 1-5 second delay to simulate real workload and generates 
 a unique execution ID for each run based on the timestamp.
 
-**Webhook URL:** `https://carlosgorrichoai.one/n8n/webhook-test/load-test` (Test endpoint)
+**Webhook URL:** `https://carlosgorrichoai.one/n8n/webhook/load-test` (Production endpoint)
+
+**Note:** This uses the production webhook (not test webhook). Your n8n instance is configured with:
+- `N8N_WEBHOOK_URL=https://carlosgorrichoai.one/n8n`
+
+Production webhooks work continuously when the workflow is active (no manual execution needed).
 
 **Response Format:**
 - `message`: "work complete"
