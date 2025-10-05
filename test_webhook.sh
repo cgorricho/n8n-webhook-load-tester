@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Test the n8n webhook manually
-# Replace with your actual webhook URL
+# URL is hardcoded in the app
 
-WEBHOOK_URL="${N8N_WEBHOOK_URL:-https://your-n8n-instance.com/webhook/load-test}"
+WEBHOOK_URL="https://carlosgorrichoai.one/n8n/webhook-test/load-test"
 
 echo "Testing webhook: $WEBHOOK_URL"
 echo ""
@@ -15,7 +15,7 @@ curl -X POST "$WEBHOOK_URL" \
   | jq .
 
 echo ""
-echo "If you see a 'work complete' message, the webhook is working!"
+echo "If you see a 'work complete' message with an executionId, the webhook is working!"
 echo ""
 echo "To test multiple concurrent requests, use the Streamlit app:"
 echo "  streamlit run app.py"
