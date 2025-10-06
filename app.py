@@ -22,8 +22,8 @@ st.set_page_config(page_title="n8n Webhook Load Tester", page_icon="🚀", layou
 st.title("🚀 n8n Webhook Load Tester")
 st.markdown("Test concurrent webhook executions with async requests")
 
-# Hardcoded webhook URL - localhost since app and n8n are on same server
-WEBHOOK_URL = "http://localhost:5678/webhook/load-test"
+# Hardcoded webhook URL - using external domain for production access
+WEBHOOK_URL = "https://carlosgorrichoai.one/n8n/webhook/load-test"
 
 logger.info(f"App started. Webhook URL: {WEBHOOK_URL}")
 
@@ -255,23 +255,37 @@ if st.button("🚀 Start Load Test", type="primary", use_container_width=True):
             for r in results:
                 if r["status"] == "success":
                     response_msg = r["response"].get("message", "N/A")
-                    workload = r["response"].get("workloadDescription", "N/A")
                     execution_id = r["response"].get("executionId", "N/A")
                     http_status = r.get("http_status", "N/A")
+                    
+                    # Extract workload delay from n8n response
+                    workload_seconds = r["response"].get("delaySeconds", 0)
+                    workload_desc = r["response"].get("workloadDescription", "N/A")
+                    
+                    # Format workload display like Go version
+                    if workload_seconds > 0:
+                        workload_display = f"{workload_seconds}s"
+                    else:
+                        workload_display = "N/A"
+                        
                 else:
                     response_msg = "Error"
-                    workload = r.get("error", "Unknown error")
+                    workload_display = "N/A"
+                    workload_desc = r.get("error", "Unknown error")
                     execution_id = "N/A"
                     http_status = r.get("http_status", "N/A")
                 
+                # Format response time like Go version (with better precision)
+                response_time = f"{r['elapsed_time']:.2f}s"
+                
                 table_data.append({
-                    "Request ID": r["request_id"],
+                    "ID": r["request_id"],
                     "Status": "✅" if r["status"] == "success" else "❌",
-                    "HTTP Status": http_status,
+                    "Response Time": response_time,
                     "Execution ID": execution_id,
-                    "Message": response_msg,
-                    "Workload": workload,
-                    "Time (s)": r["elapsed_time"]
+                    "Workload": workload_display,
+                    "Description": workload_desc,
+                    "HTTP": http_status
                 })
             
             st.dataframe(table_data, use_container_width=True, hide_index=True)
@@ -295,7 +309,7 @@ This app tests n8n webhook concurrency by making multiple async HTTP requests.
 The workflow has a random 1-5 second delay to simulate real workload and generates 
 a unique execution ID for each run based on the timestamp.
 
-**Webhook URL:** `http://localhost:5678/webhook/load-test` (localhost - same server)
+**Webhook URL:** `https://carlosgorrichoai.one/n8n/webhook/load-test` (external production endpoint)
 
 **Response Format:**
 - `message`: "work complete"

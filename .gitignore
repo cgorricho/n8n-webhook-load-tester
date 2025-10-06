@@ -1,28 +1,26 @@
-# Python
+# Ignore article assets directory
+article_assets/
+
+# Ignore old files directory  
+old_files/
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore Python cache
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-.venv
+*.pyc
+*.pyo
 
-# Streamlit
-.streamlit/secrets.toml
+# Ignore Go build artifacts
+*.exe
+go.mod
+go.sum
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
+# Ignore OS files
 .DS_Store
 Thumbs.db
-
-# Environment
-.env
-.env.local
