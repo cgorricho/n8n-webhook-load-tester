@@ -1,0 +1,78 @@
+{
+  "name": "Webhook Load Test - Random Workload",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "load-test",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "position": [
+        256,
+        304
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "webhookId": "b8278d91-9594-484c-bbf3-e78d2ff838c4"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate unique execution ID based on timestamp\nconst executionId = `exec-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;\n\n// Generate random delay between 1-5 seconds\nconst delaySeconds = Math.floor(Math.random() * 5) + 1;\nconst delayMs = delaySeconds * 1000;\n\n// Store start time and delay info\nconst startTime = new Date().toISOString();\n\n// Wait for the random delay\nawait new Promise(resolve => setTimeout(resolve, delayMs));\n\nconst endTime = new Date().toISOString();\n\nreturn {\n  json: {\n    message: 'work complete',\n    executionId: executionId,\n    delaySeconds: delaySeconds,\n    startTime: startTime,\n    endTime: endTime,\n    workloadDescription: `Simulated ${delaySeconds}s workload`\n  }\n};"
+      },
+      "id": "random-delay",
+      "name": "Random Delay",
+      "position": [
+        464,
+        304
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "position": [
+        656,
+        304
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1
+    }
+  ],
+  "connections": {
+    "Random Delay": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond to Webhook",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Random Delay",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "meta": null,
+  "pinData": {}
+}
