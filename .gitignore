@@ -36,3 +36,6 @@ webhook_tester.log
 
 # Go tester results directory
 02_go_tester/results/
+
+# Reports directory - analysis and summary files
+reports/
