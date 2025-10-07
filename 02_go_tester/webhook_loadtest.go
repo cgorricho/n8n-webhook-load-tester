@@ -192,10 +192,10 @@ return n8nResp.ExecutionID, resp.StatusCode, nil
 }
 
 func saveResultsToCSV(results []LoadTestResult) {
-filename := fmt.Sprintf("../results/go_load_test_%s.csv", time.Now().Format("2006-01-02_15-04-05"))
+filename := fmt.Sprintf("./results/go_load_test_%s.csv", time.Now().Format("2006-01-02_15-04-05"))
 
 // Create results directory if it doesn't exist
-if err := os.MkdirAll("../results", 0755); err != nil {
+if err := os.MkdirAll("./results", 0755); err != nil {
 log.Printf("Warning: Could not create results directory: %v", err)
 return
 }

@@ -58,4 +58,4 @@ go run webhook_loadtest.go $CONCURRENT_REQUESTS
 
 echo ""
 echo "✅ Load test complete!"
-echo "📁 Check the results directory for CSV output files"
+echo "📁 Check the 02_go_tester/results directory for CSV output files"

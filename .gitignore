@@ -33,3 +33,6 @@ scripts/
 
 # Log files
 webhook_tester.log
+
+# Go tester results directory
+02_go_tester/results/

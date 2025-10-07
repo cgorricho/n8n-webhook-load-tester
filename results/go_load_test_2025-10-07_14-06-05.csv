@@ -1,4 +1,0 @@
-concurrent_requests,request_id,response_time_seconds,workload_seconds,execution_id,status,timestamp,http_status
-3,1,1.846,2,exec-1759860361311-lutt0dzfv,SUCCESS,2025-10-07T14:06:00-04:00,200
-3,3,3.818,3,exec-1759860361279-114m9ra2l,SUCCESS,2025-10-07T14:06:00-04:00,200
-3,2,4.769,3,exec-1759860361236-yrqenwvi0,SUCCESS,2025-10-07T14:06:00-04:00,200
