@@ -27,3 +27,9 @@ Thumbs.db
 
 # Environment variables - contains sensitive URLs and credentials
 .env
+
+# Scripts directory - development/debugging scripts
+scripts/
+
+# Log files
+webhook_tester.log

@@ -5,7 +5,7 @@
 ### 1. n8n Workflow
 - **Name**: "Webhook Load Test - Random Workload"
 - **ID**: `9Eo6dcyKwmLpWDw8`
-- **Webhook URL**: `https://carlosgorrichoai.one/n8n/webhook-test/load-test`
+- **Webhook URL**: `https://[YOUR_DOMAIN]/n8n/webhook-test/load-test`
 - **Status**: ⚠️ Make sure it's ACTIVATED in n8n
 
 ### 2. GitHub Repository
@@ -19,7 +19,7 @@
 
 ### Step 1: Activate the n8n Workflow
 
-1. Go to your n8n instance at `https://carlosgorrichoai.one/n8n`
+1. Go to your n8n instance at `https://[YOUR_DOMAIN]/n8n`
 2. Open the workflow "Webhook Load Test - Random Workload"
 3. Click the **Activate** toggle in the top right (must be green/ON)
 
@@ -55,7 +55,7 @@ That's it! The app will open in your browser at http://localhost:8501
 
 The webhook URL is **hardcoded** in the app:
 ```
-https://carlosgorrichoai.one/n8n/webhook-test/load-test
+https://[YOUR_DOMAIN]/n8n/webhook-test/load-test
 ```
 
 No environment variables needed! Your n8n server is protected by API key and 2FA, so the webhook is publicly accessible for testing.
@@ -76,7 +76,7 @@ No environment variables needed! Your n8n server is protected by API key and 2FA
 
 **All requests fail:**
 - Make sure the n8n workflow is **activated** (green toggle)
-- Verify you can access `https://carlosgorrichoai.one/n8n`
+- Verify you can access `https://[YOUR_DOMAIN]/n8n`
 
 **No concurrent executions shown:**
 - This is normal if requests complete very quickly
@@ -85,7 +85,7 @@ No environment variables needed! Your n8n server is protected by API key and 2FA
 
 **Want to test the webhook manually?**
 ```bash
-curl -X POST "https://carlosgorrichoai.one/n8n/webhook-test/load-test" \
+curl -X POST "https://[YOUR_DOMAIN]/n8n/webhook-test/load-test" \
   -H "Content-Type: application/json" \
   -d '{"test": true}'
 ```

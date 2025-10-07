@@ -46,7 +46,7 @@ The app will open in your browser at `http://localhost:8501`
 3. **Monitor** the concurrent executions in real-time
 4. **Review results** including success rate, timing, execution IDs, and individual request details
 
-The webhook URL is pre-configured to: `https://carlosgorrichoai.one/n8n/webhook-test/load-test`
+The webhook URL is pre-configured to: `https://[YOUR_DOMAIN]/n8n/webhook-test/load-test`
 
 ## How it works
 

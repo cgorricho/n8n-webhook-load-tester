@@ -44,7 +44,7 @@ No installation required! The script automatically:
 ```
 🚀 Starting n8n Webhook Load Test
 📊 Configuration:
-   - Target URL: https://carlosgorrichoai.one/n8n/webhook/load-test
+   - Target URL: [WEBHOOK_URL_REDACTED]
    - Total Requests: 3
    - Concurrency: All requests launched simultaneously
 
@@ -105,7 +105,7 @@ ID  | Status | Time    | Execution ID                    | Delay | Description
 
 The webhook URL is hardcoded in `webhook_loadtest.go`:
 ```go
-const webhookURL = "https://carlosgorrichoai.one/n8n/webhook/load-test"
+const webhookURL = "[WEBHOOK_URL_REDACTED]"
 ```
 
 To change the target URL, edit this constant and rerun the script.

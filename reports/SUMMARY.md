@@ -4,7 +4,7 @@
 
 ### n8n Workflow
 - **Workflow Name**: Webhook Load Test - Random Workload
-- **Webhook URL**: `https://carlosgorrichoai.one/n8n/webhook-test/load-test`
+- **Webhook URL**: `https://[YOUR_DOMAIN]/n8n/webhook-test/load-test`
 - **Features**:
   - ✅ Unique execution ID per run
   - ✅ Random 1-5 second workload simulation

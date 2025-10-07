@@ -3,8 +3,8 @@
 ## ✅ WORKING CONFIGURATION
 
 ### Webhook URLs:
-- **Streamlit App**: `https://carlosgorrichoai.one/n8n/webhook/load-test`
-- **External Test Script**: `https://carlosgorrichoai.one/n8n/webhook/load-test`
+- **Streamlit App**: `[WEBHOOK_URL_REDACTED]`
+- **External Test Script**: `[WEBHOOK_URL_REDACTED]`
 - **Localhost Test Script**: `http://localhost:5678/webhook/load-test`
 
 ### n8n Workflow:
