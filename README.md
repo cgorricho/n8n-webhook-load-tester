@@ -51,8 +51,13 @@ cd 01_shell_tester
 - Command-line driven with flexible parameters
 
 ```bash
-cd 02_go_tester  
-./run_go_load_test.sh 10  # 10 concurrent requests
+cd 02_go_tester
+./run_go_load_test.sh     # Uses default 10 concurrent requests
+./run_go_load_test.sh 5   # Or specify custom amount (5 requests)
+./run_go_load_test.sh 30  # Test high concurrency (30 requests)
+./run_go_load_test.sh     # Defaults to 10 concurrent requests
+./run_go_load_test.sh 5   # Or specify custom amount (5 requests)
+./run_go_load_test.sh 30  # Test high concurrency (30 requests)
 ```
 
 ### 3. 📊 Streamlit Web UI (`03_streamlit_tester/`)
@@ -64,6 +69,8 @@ cd 02_go_tester
 
 ```bash
 cd 03_streamlit_tester
+
+
 streamlit run app.py
 ```
 
@@ -113,11 +120,16 @@ cd 01_shell_tester && ./PROD_webhook_test_external.sh
 
 **Load Testing:**
 ```bash
-cd 02_go_tester && ./run_go_load_test.sh 20
+cd 02_go_tester && ./run_go_load_test.sh    # Defaults to 10 requests
+./run_go_load_test.sh     # Uses default 10 concurrent requests
+./run_go_load_test.sh 5   # Or specify custom amount (5 requests)
+./run_go_load_test.sh 30  # Test high concurrency (30 requests)
 ```
 
 **Interactive Testing:**
 ```bash
+
+
 cd 03_streamlit_tester && streamlit run app.py
 ```
 

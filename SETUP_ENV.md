@@ -49,7 +49,7 @@ All three testing methods will automatically:
 Once configured, you can run any of the testing methods:
 
 - **Shell Test**: `cd 01_shell_tester && ./PROD_webhook_test_external.sh`
-- **Go Load Test**: `cd 02_go_tester && ./run_go_load_test.sh 10`
+- **Go Load Test**: `cd 02_go_tester && ./run_go_load_test.sh    # Defaults to 10 requests`
 - **Streamlit UI**: `cd 03_streamlit_tester && streamlit run app.py`
 
 All will use the same URL configuration from your `.env` file!

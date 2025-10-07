@@ -127,7 +127,8 @@ cd 01_shell_tester
 
 # Go load test (3 concurrent requests)
 cd 02_go_tester  
-./run_go_load_test.sh 3
+./run_go_load_test.sh     # Defaults to 10 requests
+./run_go_load_test.sh 3   # Or specify custom amount
 
 # Streamlit interface (visual testing)
 cd 03_streamlit_tester

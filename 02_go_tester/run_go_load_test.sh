@@ -26,16 +26,14 @@ fi
 
 echo "🔗 Webhook URL configured: $N8N_WEBHOOK_URL"
 
-# Check if concurrency level is provided
+# Set concurrent requests (default to 10 if not provided)
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 <concurrent_requests>"
-    echo "Example: $0 10"
-    echo ""
-    echo "This will run $1 concurrent requests against your n8n webhook"
-    exit 1
+    CONCURRENT_REQUESTS=10
+    echo "🎯 Using default: 10 concurrent requests"
+    echo "💡 Tip: You can specify a different number: $0 <concurrent_requests>"
+else
+    CONCURRENT_REQUESTS=$1
 fi
-
-CONCURRENT_REQUESTS=$1
 
 echo "🚀 Starting Go load test..."
 echo "📊 Concurrent requests: $CONCURRENT_REQUESTS"
