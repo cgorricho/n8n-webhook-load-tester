@@ -24,3 +24,6 @@ go.sum
 # Ignore OS files
 .DS_Store
 Thumbs.db
+
+# Environment variables - contains sensitive URLs and credentials
+.env

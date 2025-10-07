@@ -23,7 +23,15 @@ st.title("🚀 n8n Webhook Load Tester")
 st.markdown("Test concurrent webhook executions with async requests")
 
 # Hardcoded webhook URL - using external domain for production access
-WEBHOOK_URL = "https://carlosgorrichoai.one/n8n/webhook/load-test"
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+WEBHOOK_URL = os.getenv("N8N_WEBHOOK_URL")
+if not WEBHOOK_URL:
+    st.error("N8N_WEBHOOK_URL environment variable not found! Please create a .env file.")
+    st.stop()
 
 logger.info(f"App started. Webhook URL: {WEBHOOK_URL}")
 
@@ -309,7 +317,7 @@ This app tests n8n webhook concurrency by making multiple async HTTP requests.
 The workflow has a random 1-5 second delay to simulate real workload and generates 
 a unique execution ID for each run based on the timestamp.
 
-**Webhook URL:** `https://carlosgorrichoai.one/n8n/webhook/load-test` (external production endpoint)
+**Webhook URL:** Configured via .env file (external production endpoint)
 
 **Response Format:**
 - `message`: "work complete"
